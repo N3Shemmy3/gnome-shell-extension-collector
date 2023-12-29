@@ -4,7 +4,8 @@
   "description": "",
   "main": "extension.js",
   "scripts": {
-    "build": "rm -f firefox-pip@bennypowers.com.zip && zip -r firefox-pip@bennypowers.com.zip . -x@exclude.lst",
+    "build": "rm -f collector-pip@mijorus.it.zip && zip -r collector-pip@mijorus.it.zip . -x@exclude.lst",
+    "install": "npm run build && unzip -qq -o collector-pip@mijorus.it.zip -d ~/.local/share/gnome-shell/extensions/collector-pip@mijorus.it && gnome-extensions enable collector-pip@mijorus.it",
     "typecheck": "tsc"
   },
   "author": "",

@@ -19,23 +19,11 @@
 import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 
 import _GLib from 'gi://GLib';
+import { Widget } from '@girs/gtk-4.0';
 /** @type {import('@girs/glib-2.0')} */
 const GLib = _GLib;
 
-import { locales } from './lib/locales.js';
-
 export default class FirefoxPIPExtension extends Extension {
-  /** @param {import('@girs/meta-13').Window} window */
-  static isPiP(window) {
-    if (window.get_wm_class().match(/firefox/) || window.get_sandboxed_app_id().match(/firefox/)) {
-      const title = window.get_title();
-      for (const lang of GLib.get_language_names())
-        if (title === locales.get(lang))
-          return true;
-    }
-    return false;
-  }
-
   listenerId = 0;
 
   enable() {
@@ -50,7 +38,8 @@ export default class FirefoxPIPExtension extends Extension {
 
   /** @param {import('@girs/meta-13').Window} window */
   onCreated(window) {
-    if (FirefoxPIPExtension.isPiP(window)) {
+    if (window.get_gtk_application_id() === 'it.mijorus.collector' 
+      && window.get_title() === 'CollectorMainWindow') {
       window.raise_and_make_recent();
       window.make_above();
       window.stick();
