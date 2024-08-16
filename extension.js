@@ -16,20 +16,15 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
-
-import _GLib from 'gi://GLib';
-import { Widget } from '@girs/gtk-4.0';
-/** @type {import('@girs/glib-2.0')} */
-const GLib = _GLib;
-
-export default class FirefoxPIPExtension extends Extension {
+class Extension {
   listenerId = 0;
 
   enable() {
-    this.listenerId = global.display.connect('window-created', (_, window) =>
-      window.get_compositor_private().connect('realize', () =>
-        void this.onCreated(window)));
+    this.listenerId = global.display.connect("window-created", (_, window) =>
+      window
+        .get_compositor_private()
+        .connect("realize", () => void this.onCreated(window))
+    );
   }
 
   disable() {
@@ -38,8 +33,10 @@ export default class FirefoxPIPExtension extends Extension {
 
   /** @param {import('@girs/meta-13').Window} window */
   onCreated(window) {
-    if (window.get_gtk_application_id() === 'it.mijorus.collector' 
-      && window.get_title() === 'CollectorMainWindow') {
+    if (
+      window.get_gtk_application_id() === "it.mijorus.collector" &&
+      window.get_title() === "CollectorMainWindow"
+    ) {
       window.raise_and_make_recent();
       window.make_above();
       window.stick();
@@ -47,3 +44,7 @@ export default class FirefoxPIPExtension extends Extension {
   }
 }
 
+/* exported init */
+function init() {
+  return new Extension();
+}

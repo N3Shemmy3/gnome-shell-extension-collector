@@ -1,10 +1,8 @@
 {
-  "name": "Collector - complementary extension",
-  "uuid": "collector-pip@mijorus.it",
-  "description": "Allows the Collector window to stay always on top",
-  "shell-version": [
-    "45"
-  ],
-  "url": "https://github.com/mijorus/gnome-shell-extension-collector",
-  "version": 6
+  "name": "Collector Always on Top",
+  "uuid": "collector@n3shemmy3.dev",
+  "description": "Ensure that Collector windows are always on top",
+  "shell-version": ["42", "43", "44"],
+  "url": "https://github.com/n3shemmy3/gnome-shell-extension-collector",
+  "version": 2
 }
